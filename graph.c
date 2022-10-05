@@ -82,6 +82,46 @@ void GRAPHimprime(Graph *g){
 }
 
 
+bool GRAPHcaminho(Graph *g,int v, int w, int marcado[],int ident){
+   for (int i = 0; i < ident; i++)
+   {
+        printf(" ");
+   }
+   
+    printf("g,%d,%d \n",v,w);
+
+    if(v==w){
+       printf("%d-", v);
+
+        return true;
+    }
+    marcado[v]=1;
+    for (int i = 0; i < g->num_v; i++){
+        if(g->matriz[v][i]!=0)
+            if(marcado[i]==0)
+                if (GRAPHcaminho(g,i,w,marcado,ident+4)){
+                    printf("%d-", v);
+
+                    return true;
+                }
+                    
+    }
+     return false;
+
+}
+bool GRAPHcaminhoGeraMarcado(Graph *g,int v, int w){
+    int marcado[g->num_v];
+    for (int i = 0; i < g->num_v; i++)
+    {
+        marcado[i]=0;
+    }
+    return GRAPHcaminho(g,v,w,marcado,0);
+    
+
+
+}
+
+
 void GRAPHdestroi(Graph *g) {
     
     for (int i = 0; i < g->num_v; i++)

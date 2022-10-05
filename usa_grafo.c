@@ -20,13 +20,16 @@ int main() {
 
     // scanf("%d", &N);
 
-    graph = GRAPHconstroi(4);
+    graph = GRAPHconstroi(5);
     GRAPHinsere_aresta(graph, ARESTA(0,1));
     GRAPHinsere_aresta(graph, ARESTA(0,2));
+    GRAPHinsere_aresta(graph, ARESTA(0,4));
+
     GRAPHimprime(graph);
 
     GRAPHremove_aresta(graph,ARESTA(0,2));
     GRAPHimprime(graph);
+    GRAPHcaminhoGeraMarcado(graph,0,4);
     
     printf("Num arestas: %d \n",GRAPHget_num_aresta(graph));
     printf("Num verts: %d \n",GRAPHget_num_vertice(graph));
