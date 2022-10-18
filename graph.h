@@ -27,10 +27,13 @@ int GRAPHget_num_aresta(Graph *g);
 
 int GRAPHget_num_vertice(Graph *g);
 
-bool GRAPHcaminho(Graph *g,int v, int w, int marcado[],int ident);
+// bool GRAPHcaminho(Graph *g,int v, int w, int marcado[]);
+bool GRAPHcaminho(Graph *g,int v, int w);
+
 
 bool GRAPHcaminhoGeraMarcado(Graph *g,int v, int w);
 
+int GRAPHconexo(Graph *g);
 
 void GRAPHimprime(Graph *g);
 

@@ -1,7 +1,7 @@
 /*
  * Tarefa de laboratorio 00_a - Pilha
  *
- * GEN254 - Grafos - 2022/2
+ * GEN254 - GRAPHs - 2022/2
  *
  * Nome:      XXXX
  * Matricula: XXXX
@@ -82,44 +82,58 @@ void GRAPHimprime(Graph *g){
 }
 
 
-bool GRAPHcaminho(Graph *g,int v, int w, int marcado[],int ident){
-   for (int i = 0; i < ident; i++)
-   {
-        printf(" ");
-   }
-   
-    printf("g,%d,%d \n",v,w);
+// static bool GRAPHcaminho(Graph *g, int v, int w, int marcado[], int indent) {
+//     for (int i = 0; i < indent; i++) printf("    ");
+//     printf("caminho | v1: %d, v2: %d\n", v, w);
 
-    if(v==w){
-       printf("%d-", v);
+//     if (v == w) {
+//         printf("%d ", v);
+//         return true;
+//     }
 
-        return true;
-    }
-    marcado[v]=1;
-    for (int i = 0; i < g->num_v; i++){
-        if(g->matriz[v][i]!=0)
-            if(marcado[i]==0)
-                if (GRAPHcaminho(g,i,w,marcado,ident+4)){
-                    printf("%d-", v);
+//     marcado[v] = 1;
+//     for (int u = 0; u < g->num_v; u++)
+//         if (g->matriz[v][u] != 0)
+//             if (marcado[u] == 0)
+//                 if (caminho(g, u, w, marcado, indent + 1)) {
+//                     printf("%d ", v);
+//                     return true;
+//                 }
+//     return false;
+// }
 
-                    return true;
-                }
-                    
-    }
-     return false;
-
-}
-bool GRAPHcaminhoGeraMarcado(Graph *g,int v, int w){
+bool GRAPHcaminho(Graph *g, int v, int w) {
     int marcado[g->num_v];
-    for (int i = 0; i < g->num_v; i++)
-    {
-        marcado[i]=0;
+
+    for (int i = 0; i < g->num_v; i++) {
+        marcado[i] = 0;
     }
-    return GRAPHcaminho(g,v,w,marcado,0);
+
+    bool has_path = caminho(g, w, v, marcado, 0);
+    printf("\n");
+    return has_path;
+}
+
+int GRAPHconexo(Graph *g){
+    for(int i = 0; i < g->num_v; i++){
+        for(int j = i + 1; j < g->num_v; j++){
+            if(i != j)
+                if(GRAPHcaminho(g, i, j) == false) return 1;
+        }
+    }
+    return 0;
+}
+// bool GRAPHcaminhoGeraMarcado(Graph *g,int v, int w){
+//     int marcado[g->num_v];
+//     for (int i = 0; i < g->num_v; i++)
+//     {
+//         marcado[i]=0;
+//     }
+//     return GRAPHcaminho(g,v,w,marcado);
     
 
 
-}
+// }
 
 
 void GRAPHdestroi(Graph *g) {
